@@ -1,0 +1,22 @@
+# Protection for Apache (XAMPP and most web hosts).
+Options -Indexes
+
+# Never serve dotfiles, settings, or database files.
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+<FilesMatch "^(config|config\.local)\.php$|^router\.php$|\.(md|example|sqlite3?|db|log|bak|csv|lock|ps1)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Some hosts (FastCGI/CGI) do not pass the login header to PHP; this passes it along for the admin pages.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>

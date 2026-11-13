@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BantayKlima | Laguna climate early warning</title>
+<meta name="description" content="El Niño and La Niña risk, PAGASA advisories and announcements for every city and municipality in Laguna.">
+<script src="assets/theme.js"></script>
+<script>if (new URLSearchParams(location.search).get('brief') === '1') document.documentElement.classList.add('town-briefing');</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/dashboard.css">
+<link rel="preload" href="assets/fonts/poppins-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body class="dashboard">
+<nav class="topbar">
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><span class="logo" aria-hidden="true"></span>BantayKlima</a>
+    <div class="navlinks">
+      <button data-theme-toggle type="button" aria-pressed="false"><span aria-hidden="true">◐</span><span data-theme-label>Dark mode</span></button>
+      <button id="lang" type="button" class="lang" aria-label="Switch to Filipino">FIL</button>
+      <span id="nav-auth" class="navlinks"></span>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-in">
+    <div>
+      <h1 id="hero-title">Laguna climate early warning</h1>
+      <p id="hero-sub">Check local weather, climate risk and advisories for Laguna.</p>
+      <a id="full-dashboard" href="index.html">Full dashboard</a>
+    </div>
+    <div class="pick">
+      <label id="town-label" for="town">Municipality</label>
+      <select id="town" aria-label="Your municipality"><option value="">Choose your municipality</option></select>
+    </div>
+  </div>
+</section>
+
+<nav class="dashboard-links" aria-label="Dashboard sections">
+  <a href="#weather" id="jump-weather">Weather</a>
+  <a href="#risk-map" id="jump-map">Weather map</a>
+  <a href="#town-comparison" id="jump-compare">Compare towns</a>
+  <a href="#advisory-timeline" id="jump-updates">Advisories</a>
+</nav>
+
+<main class="up">
+  <p id="welcome" class="ok" role="status" hidden></p>
+  <p id="warn" class="err" role="alert" hidden></p>
+  <section class="card today-card" aria-labelledby="today-title">
+    <header class="weather-header"><div><h2 id="today-title">What should I do today?</h2><p id="today-town" class="small"></p></div></header>
+    <div id="today-body" aria-live="polite"><p class="small">Loading your town briefing…</p></div>
+  </section>
+
+  <div class="briefing">
+    <section class="card weather-card" id="weather">
+      <header class="weather-header">
+        <div><h2 id="weather-title">Local weather</h2><p class="small" id="weather-place"></p></div>
+        <button id="weather-refresh" class="secondary" type="button" disabled>Refresh</button>
+      </header>
+      <p id="weather-status" class="small" role="status">Loading weather…</p>
+      <div id="weather-body"></div>
+      <p class="small weather-source"><a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · <span id="weather-source">Weather model data</span></p>
+    </section>
+    <div class="briefing-stack">
+      <section class="card mycard" id="mycard" aria-live="polite" tabindex="-1"></section>
+      <section class="card" id="rainfall-tracker"><h2 id="rainfall-title">Rainfall vs. typical</h2><div id="rainfall-body"></div></section>
+    </div>
+    <div class="grid2 dashboard-pair">
+    <section class="card">
+      <h2 id="h-notes">Announcements</h2>
+      <div id="notes">Loading…</div>
+    </section>
+    <section class="card">
+      <h2 id="h-pagasa">PAGASA status</h2>
+      <div id="advisory">Loading…</div>
+      <div id="docs" class="docs"></div>
+      <p class="small"><a id="pagasa-link" href="https://bagong.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories" target="_blank" rel="noopener">PAGASA's official advisories</a></p>
+    </section>
+    <section class="card" id="advisory-timeline">
+      <h2 id="timeline-title">Advisory timeline</h2>
+      <div id="timeline-body" aria-live="polite"></div>
+      <p class="small"><a id="timeline-source" href="https://bagong.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories" target="_blank" rel="noopener">Official PAGASA advisories</a></p>
+    </section>
+    </div>
+  </div>
+
+  <div class="explore">
+  <section class="card" id="risk-map">
+    <div class="map-heading"><h2 id="h-map">Laguna weather map</h2><button class="secondary" id="map-expand" type="button" hidden>Full screen</button></div>
+    <div id="map-controls" hidden>
+      <label class="field"><span id="map-layer-label">Map layer</span><select id="map-layer">
+        <option value="risk">Climate risk</option><option value="temperature_2m">Temperature</option>
+        <option value="precipitation">Rainfall</option><option value="precipitation_probability">Rain chance</option>
+        <option value="wind_speed_10m">Wind speed</option><option value="radar">Radar</option>
+        <option value="satellite">Satellite</option><option value="fires">Fire hotspots</option>
+      </select></label>
+      <label class="field"><span id="map-town-label">Find on map</span><select id="map-town"><option value="">Choose a municipality</option></select></label>
+      <button class="secondary" id="map-reset" type="button">Reset view</button>
+      <div id="map-timeline" hidden>
+        <button class="secondary" id="map-play" type="button">Play</button>
+        <label class="field"><span id="map-hour-label">Forecast time</span><input id="map-hour" type="range" min="0" max="47" value="0"></label>
+      </div>
+      <label class="check" id="map-smooth-label" hidden><input id="map-smooth" type="checkbox" checked><span>Smooth overlay</span></label>
+      <label class="check" id="map-wind-label" hidden><input id="map-wind" type="checkbox"><span>Animated wind</span></label>
+    </div>
+    <div id="map-box">
+      <div id="map" hidden></div>
+      <p id="map-msg" class="small" role="status"></p>
+      <button id="map-btn" type="button" hidden>Show map</button>
+    </div>
+    <div id="map-legend"></div>
+    <p class="small" id="map-source"></p>
+    <p class="small observation-links"><a href="https://www.pagasa.dost.gov.ph/radar" target="_blank" rel="noopener">PAGASA radar</a> · <a href="https://worldview.earthdata.nasa.gov/" target="_blank" rel="noopener">NASA satellite</a> · <a href="https://firms.modaps.eosdis.nasa.gov/map/" target="_blank" rel="noopener">NASA FIRMS</a></p>
+  </section>
+  <div class="briefing-stack">
+  <section class="card" id="municipalities" tabindex="-1">
+    <h2 id="h-towns">All municipalities</h2>
+    <div class="finder">
+      <input id="q" type="search" placeholder="Search a municipality" aria-label="Search a municipality" autocomplete="off">
+      <select id="sort-towns" aria-label="Sort municipalities"><option value="name">Alphabetical</option><option value="risk">Highest risk first</option></select>
+      <div id="chips" class="chips"></div>
+    </div>
+    <ul id="towns" class="towns"></ul>
+    <p id="towns-empty" class="small" hidden></p>
+    <p id="updated" class="small"></p>
+  </section>
+  <section class="card" id="town-comparison">
+    <h2 id="compare-title">Compare municipalities</h2>
+    <div class="compare-controls">
+      <label class="field"><span id="compare-first-label">First municipality</span><select id="compare-first"></select></label>
+      <label class="field"><span id="compare-second-label">Second municipality</span><select id="compare-second"></select></label>
+      <button id="compare-submit" class="secondary" type="button">Compare</button>
+    </div>
+    <div id="compare-body" aria-live="polite"></div>
+  </section>
+  </div>
+  </div>
+
+  <section class="card cta" id="cta" hidden></section>
+</main>
+<footer>
+  BantayKlima is a student project. It is not an official service of PAGASA, DOST or any local government unit, and it is not affiliated with them.
+  It gives guidance only; always follow official PAGASA and LGU bulletins. In an emergency, call 911.<br>
+  Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> &middot;
+  ENSO index from NOAA Climate Prediction Center &middot; Province status from PAGASA &middot; Map &copy; OpenStreetMap contributors.
+  <a href="privacy.php">Privacy notice</a> &middot; <a href="unsubscribe.php">Stop alerts</a> &middot; <a href="admin/">Admin</a>
+</footer>
+
+<div id="modal" class="modal" hidden>
+  <div class="modal-box" id="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button id="modal-close" type="button" class="modal-close" aria-label="Close">&times;</button>
+    <h3 id="modal-title"></h3>
+    <div id="modal-body"></div>
+  </div>
+</div>
+<script src="assets/app.js"></script>
+<script src="assets/weather.js"></script>
+<script src="assets/forecast-map.js"></script>
+<script src="assets/local-insights.js"></script>
+<script src="assets/today.js"></script>
+</body>
+</html>

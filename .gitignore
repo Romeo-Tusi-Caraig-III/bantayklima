@@ -1,0 +1,10 @@
+/.env
+/.env.*
+/config.local.php
+/data/*
+!/data/.htaccess
+/uploads/*
+!/uploads/.htaccess
+*.pdf
+/.codex/
+/.agents/

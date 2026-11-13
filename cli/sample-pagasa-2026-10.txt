@@ -1,0 +1,31 @@
+PH Meteorological Drought Monitor
+Dry Condition / Dry Spell / Drought Assessment · as of October 2026
+Area Dry condition Dry spell Drought
+LUZON
+10
+Abra, Batanes, Cagayan,
+Isabela, Kalinga, Marinduque,
+Oriental Mindoro, Palawan,
+Quezon, Romblon
+2
+Masbate, Sorsogon
+4
+Albay, Camarines Norte,
+Camarines Sur, Catanduanes
+VISAYAS
+4
+Aklan, Antique, Guimaras, Iloilo
+7
+Biliran, Bohol, Capiz, Cebu,
+Negros Occidental, Northern
+Samar, Southern Leyte
+4
+Leyte, Negros Oriental, Samar,
+Siquijor
+MINDANAO
+None
+23
+Agusan del Norte, Basilan, Camiguin, City of Isabela, Cotabato
+1
+Misamis Oriental
+TOTAL 14 32 9

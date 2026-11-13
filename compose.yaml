@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    image: ${BANTAYKLIMA_IMAGE:-bantayklima:local}
+    ports:
+      - "127.0.0.1:${BANTAYKLIMA_PORT:-8080}:80"
+    environment:
+      BANTAYKLIMA_ADMIN_PASSWORD: ${BANTAYKLIMA_ADMIN_PASSWORD:-}
+      BANTAYKLIMA_BASE_URL: ${BANTAYKLIMA_BASE_URL:-http://localhost:8080}
+      BANTAYKLIMA_CONTACT_EMAIL: ${BANTAYKLIMA_CONTACT_EMAIL:-}
+    volumes:
+      - data:/var/www/html/data
+      - uploads:/var/www/html/uploads
+    restart: unless-stopped
+
+volumes:
+  data:
+  uploads:

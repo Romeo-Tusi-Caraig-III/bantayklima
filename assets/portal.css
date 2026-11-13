@@ -1,0 +1,83 @@
+.portal { --dashboard-width: 1500px; }
+.portal main { padding: 24px var(--gutter); gap: var(--panel-gap); }
+.portal main.auth { max-width: 530px; margin-inline: auto; padding-top: clamp(20px, 5vh, 60px); }
+.portal main.auth-register { max-width: 780px; }
+.portal .auth .card, .portal .account-layout .card { padding: clamp(16px, 3vw, 26px); }
+.portal .auth form, .portal .account-layout form, .portal .admin-workspace form { margin-top: 14px; }
+.portal .auth-register form, .portal .profile-card form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.portal .form-wide { grid-column: 1 / -1; }
+.portal form input, .portal form select, .portal form textarea { min-width: 0; }
+.portal form .field input, .portal form .field select, .portal form .field textarea { width: 100%; }
+.portal form button:not([class]), .portal form button[type="submit"]:not(.secondary, .danger, .small-btn) { color: var(--primary-ink); }
+.portal .account-layout { max-width: 1140px; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: start; }
+.portal .profile-card { grid-row: span 2; }
+.portal .account-layout .ok, .portal .account-layout .err, .portal-heading { grid-column: 1 / -1; }
+.portal .account-danger { border-color: var(--risk-severe); }
+.portal-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.portal-heading p { margin: 0; color: var(--mute); font-size: .92rem; }
+.portal .admin-brand { font: 700 .75rem var(--body); border: 1px solid var(--line); border-radius: 99px; padding: 3px 8px; }
+.admin-layout { display: grid; grid-template-columns: 205px minmax(0, 1fr); max-width: var(--dashboard-width); margin: 0 auto; padding-inline: var(--gutter); gap: var(--panel-gap); align-items: start; }
+.admin-nav { position: sticky; top: 76px; display: grid; align-content: start; gap: 4px; margin-top: 24px; border: 1px solid var(--line); border-radius: 12px; padding: 8px; background: var(--card); }
+.admin-nav a { padding: 9px 10px; border-radius: 8px; color: var(--ink); text-decoration: none; font-weight: 700; font-size: .92rem; }
+.admin-nav a:hover, .admin-nav a[aria-current="page"] { background: var(--soft); color: var(--green); }
+.portal main.admin-workspace { width: 100%; padding-inline: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+.admin-workspace > [role="status"], .admin-workspace > [role="alert"] { grid-column: 1 / -1; }
+.admin-columns {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--panel-gap);
+  align-items: start;
+}
+.admin-columns[data-tab="announce"] { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+.admin-stack { display: grid; gap: var(--panel-gap); min-width: 0; }
+.admin-workspace h2 + p { margin-top: 4px; }
+.admin-workspace .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.admin-workspace .actions { grid-template-columns: minmax(0, 1fr); }
+.admin-workspace .actions .btn { background: var(--soft); color: var(--ink); border: 1px solid var(--line); }
+.admin-workspace .actions .btn:hover { border-color: var(--green); }
+.admin-workspace [data-tab="pagasa"]:last-of-type { grid-column: 1 / -1; }
+.admin-workspace .item > span { min-width: 0; overflow-wrap: anywhere; }
+.admin-workspace #ann-btn { justify-self: start; }
+.admin-activity { grid-column: 1 / -1; }
+#ann-preview { width: min(520px, calc(100% - 24px)); max-height: 88vh; padding: 20px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+#ann-preview::backdrop { background: #091423a0; }
+#ann-preview .note { background: var(--soft); padding: 12px; border-radius: 8px; overflow-wrap: anywhere; }
+#ann-preview-body { white-space: pre-wrap; }
+#ann-preview-channels { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; }
+#ann-preview-channels dt { font-weight: 700; }
+#ann-preview-channels dd { margin: 0; }
+#ann-publish { color: var(--primary-ink); }
+.delivery-line { display: block; }
+.portal main.admin-report { padding-block: 18px; }
+.report-columns { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--panel-gap); align-items: start; }
+.admin-report .stats { grid-template-columns: repeat(auto-fit, minmax(min(125px, 100%), 1fr)); }
+.admin-report .stats div { padding: 9px 11px; }
+.admin-report .stats strong { font-size: 23px; }
+.admin-report .stats span { font-size: .78rem; }
+.report-empty { margin: 6px 0 0; padding: 9px 12px; background: var(--soft); color: var(--mute); border-radius: 8px; font-size: .87rem; }
+.report-levels, .check-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(105px, 100%), 1fr)); gap: 8px; }
+.report-levels div, .check-summary .card { display: flex; align-items: center; justify-content: space-between; gap: 4px; flex-wrap: wrap; }
+.report-levels div { padding: 6px 8px; background: var(--soft); border-radius: 8px; }
+.report-levels strong, .check-summary strong { font-size: 1.45rem; line-height: 1; }
+.report-exports { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.report-exports h2 { margin-bottom: 2px; }
+.check-list { margin: 6px 0 0; }
+.check-list div { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 5fr); gap: 4px 14px; padding: 8px 0; border-top: 1px solid var(--line); }
+.check-list dt { font-weight: 600; }
+.check-list dd { margin: 0; color: var(--mute); overflow-wrap: anywhere; }
+.check-group summary { font-size: 1rem; font-weight: 700; }
+@media (max-width: 960px) {
+  .admin-layout { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .admin-nav { position: static; display: flex; flex-wrap: wrap; margin-top: 12px; }
+  .portal main.admin-workspace { padding-top: 14px; }
+}
+@media (max-width: 650px) {
+  .portal main.admin-workspace, .admin-columns, .admin-columns[data-tab="announce"],
+  .portal .account-layout, .portal .auth-register form, .portal .profile-card form { grid-template-columns: minmax(0, 1fr); }
+  .portal .profile-card { grid-row: auto; }
+  .admin-nav a { padding: 8px; font-size: .83rem; }
+  .report-columns, .check-list div { grid-template-columns: minmax(0, 1fr); }
+  .check-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .check-summary .card { padding: 10px 7px; }
+}

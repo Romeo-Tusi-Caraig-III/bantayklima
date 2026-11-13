@@ -1,0 +1,3 @@
+# Nothing here is served directly: PDFs are handed out by file.php, so they open the same way on every server.
+Options -Indexes -ExecCGI
+Require all denied

@@ -9,7 +9,7 @@ const LABELS = {
         why: 'Why?', history: 'See history', emergency: 'Emergency', updated: 'Last assessed: ', never: 'No assessment has been run yet.',
         noNotes: 'No announcements yet.', all: 'All of Laguna', other: 'Filipino', showMap: 'Show map',
         mapFail: 'The map could not load. The list of municipalities still works.', histFail: 'Could not load the history.',
-        noHistory: 'No history yet.', heroTitle: 'Laguna climate early warning', heroSub: 'Check local weather, climate risk and advisories for Laguna.',
+        noHistory: 'No history yet.', heroTitle: 'Laguna climate early warning', heroSub: 'See local forecasts, climate risks, and official advisories for Laguna.',
         townLabel: 'Municipality', riskHeading: 'Climate risk', highest: 'Highest risk first', alphabetical: 'Alphabetical',
         pickTown: 'Choose your municipality', ofTowns: 'municipalities in Laguna today', pickHint: 'Choose your municipality above, or tap one in the list below.',
         notesH: 'Announcements', pagasaH: 'PAGASA status', townsH: 'All municipalities', mapH: 'Laguna weather map', search: 'Search a municipality',

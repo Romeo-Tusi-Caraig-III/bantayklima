@@ -13,7 +13,7 @@ function check(string $name, $expected, $actual): void {
 }
 
 $r = risk_assess(0.1, 'normal', 1.0, 1.0);
-check('normal conditions', ['none', 'normal'], [$r['hazard'], $r['level']]);
+check('normal conditions', ['none', 'watch'], [$r['hazard'], $r['level']]);
 
 $r = risk_assess(1.2, 'drought', 0.4, 0.4);
 check('El Niño + drought + dry weather', ['drought', 'severe'], [$r['hazard'], $r['level']]);
